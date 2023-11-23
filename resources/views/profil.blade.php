@@ -47,7 +47,7 @@
                         <div>
                         <div class="flex justify-between">
                         <div class="mt-10">
-                            <a href="#" class="text-2xl  font-bold text-white hover:underline">Hai!!</a>
+                            <p class="text-2xl  font-bold text-white">Hai, {{ Auth::user()->nama }} !!</p>
                             <p class="mt-2 text-white">Yuk Cek Kondisi Kesehatanmu!</p>
                         </div>
                         <div class="relative h-32 w-32 ..."> 
@@ -89,9 +89,9 @@
               <img src="/img/profil.png" alt="" class="w-full h-auto object-cover rounded-lg">
               <div class="absolute bottom-0 left-0 right-0 h-40 bg-red-dark bg-opacity-75 backdrop-blur text-white p-4 rounded-b-lg">
                 <h1 class="text-2xl font-semibold text-center">Donor Terakhir</h1>
-                <p class="mt-2 text-center">Sabtu, 07 Oktober 2023</p>
-                <p class="mt-2 text-center">18.00 WIB</p>
-                <p class="mt-2 text-center">RS Jaya Medika</p>
+                <p class="mt-2 text-center">{{$riwayatTerbaru ? date("l, d F Y", strtotime($riwayatTerbaru->tanggal_donor )) : 'data belum tersedia' }}</p>
+                <p class="mt-2 text-center">{{$riwayatTerbaru ? date("g:i A", strtotime($riwayatTerbaru->jam_donor)) : '0.00'}}</p>
+                <p class="mt-2 text-center">{{$riwayatTerbaru->lokasiDonor->nama_lokasi ?? ''}}</p>
               </div>
             </div>
 
@@ -100,8 +100,9 @@
               <img src="/img/profil.png" alt="" class="w-full h-auto object-cover rounded-lg">
               <div class="absolute bottom-0 left-0 right-0 h-40 bg-red-dark bg-opacity-75 backdrop-blur text-white p-4 rounded-b-lg">
               <h1 class="text-2xl font-semibold text-center">Donor Kembali</h1>
-                <p class="mt-2 text-center">Selasa, 07 November 2023</p>
-                <p class="mt-2 text-center">18.00 WIB</p>
+                <p class="mt-2 text-center">{{$riwayatMenyusul ? date("l, d F Y", strtotime($riwayatMenyusul->tanggal_donor )) : 'data belum tersedia' }}</p>
+                <p class="mt-2 text-center">{{$riwayatMenyusul ? date("g:i A", strtotime($riwayatMenyusul->jam_donor)) : '0.00'}}</p>
+                <p class="mt-2 text-center">{{$riwayatMenyusul->lokasiDonor->nama_lokasi ?? ''}}</p>
             </div>
         </div>
     </div>
@@ -113,24 +114,14 @@
         <div class="tracking-wide text-2xl text-white font-semibold text-center">Riwayat Donor</div>
     </div>
     </div>
+    @foreach ($riwayatDonor as $riwayat)
     <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-5 hover:scale-105 duration-500">
-    <div class="p-8 ">
-        <div class="tracking-wide text-medium text-red-dark -500 font-bold">RS Maju Jaya</div>
-        <p class="block mt-1 text-lg leading-tight text-black">Jumat, 7 Juli 2023, 15.00 WIB</p>
+        <div class="p-8 ">
+            <div class="tracking-wide text-medium text-red-dark -500 font-bold">{{ $riwayat->lokasiDonor->nama_lokasi }}</div>
+            <p class="block mt-1 text-lg leading-tight text-black">{{ date("l, d F Y", strtotime($riwayat->tanggal_donor))}}, {{ date("g:i A", strtotime($riwayat->jam_donor)) }}</p>
+        </div>
     </div>
-    </div>
-    <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-5 hover:scale-105 duration-500">
-    <div class="p-8 ">
-        <div class="tracking-wide text-medium text-red-dark -500 font-bold">PMI Jayabaya</div>
-        <p class="block mt-1 text-lg leading-tight text-black">Senin, 7 Agustus 2023, 15.00 WIB</p>
-    </div>
-    </div>
-    <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-5 hover:scale-105 duration-500">
-    <div class="p-8">
-        <div class="tracking-wide text-medium text-red-dark -500 font-bold">RSUK</div>
-        <p class="block mt-1 text-lg leading-tight text-black">Kamis, 7 September 2023, 15.00 WIB</p>
-    </div>
-    </div>
+    @endforeach
 </div>
 
 <div class="max-w-md mx-auto bg-red-medium rounded-xl shadow-md overflow-hidden md:max-w-2xl m-5  hover:scale-105 duration-500 text-center">

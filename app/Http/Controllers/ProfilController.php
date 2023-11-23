@@ -19,7 +19,9 @@ class ProfilController extends Controller
         $riwayatDonor = RiwayatDonor::paginate(5);
         $goldar = Auth::user()->gol_darah;
         $totalDonor = RiwayatDonor::where('id_user', Auth::user()->id)->where('tanggal_donor', '<=', date("Y-m-d"))->orderByDesc('tanggal_donor')->count();
-        return view('profil', compact('riwayatDonor', 'lokasiDonor', 'goldar', 'totalDonor'));
+        $riwayatTerbaru = RiwayatDonor::with(['lokasiDonor'])->where('id_user', Auth::user()->id)->where('tanggal_donor', '<=', date("Y-m-d"))->orderByDesc('tanggal_donor')->first();
+        $riwayatMenyusul = RiwayatDonor::with(['lokasiDonor'])->where('id_user', Auth::user()->id)->where('tanggal_donor', '>', date("Y-m-d"))->orderBy('tanggal_donor')->first();
+        return view('profil', compact('riwayatDonor', 'lokasiDonor', 'goldar', 'totalDonor', 'riwayatTerbaru', 'riwayatMenyusul'));
     }
 
 }
