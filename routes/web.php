@@ -17,7 +17,7 @@ use App\Http\Controllers\ProfilController;
 |
 */
 
-Route::middleware(['web'])->post('/simpan_data_riwayat', [RiwayatController::class, 'simpan_data_riwayat'])->name('simpan_data_riwayat');
+Route::post('/simpan_data_riwayat', [RiwayatController::class, 'simpan_data_riwayat'])->name('simpan_data_riwayat');
 Route::get('/riwayat', [RiwayatController::class, 'index'])->name('tampil_riwayat');
 Route::put('/riwayat/{id}/edit', [RiwayatController::class, 'edit_riwayat'])->name('edit_riwayat');
 Route::delete('/riwayat/{id}', [RiwayatController::class, 'hapus_riwayat'])->name('hapus_riwayat');
@@ -61,3 +61,11 @@ Route::get('/event', function () {
 Route::get('/admin', function () {
     return view('admin');
 })->name('admin');
+
+Route::get('/validasi', function () {
+    return view('validasi');
+})->name('validasi');
+
+Route::get('/artikel', function () {
+    return view('artikel');
+})->name('admin.artikel');

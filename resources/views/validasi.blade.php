@@ -42,8 +42,7 @@
                 <span class="-mr-1 font-medium">Dashboard</span>
             </a>
             </button>
-        
-
+    
             <!-- Artikel -->
             <button>
             <a href="{{ route ('admin.artikel')}}" class="px-4 py-3 flex items-center space-x-4 rounded-md text-cream-medium group">
@@ -51,7 +50,6 @@
                 <span>Artikel</span>
             </a>
             </button>
-    
 
             <!-- Validasi Riwayat -->
             <button>

@@ -30,8 +30,8 @@
         </div>
     </nav>
 
-    <!-- Slide Samping -->
-    <div id="sideNav" class="lg:block hidden bg-red-dark w-64 h-screen fixed rounded-none border-none">
+   <!-- Slide Samping -->
+   <div id="sideNav" class="lg:block hidden bg-red-dark w-64 h-screen fixed rounded-none border-none">
         <!-- Items -->
         <div class="p-4 space-y-4">
             <!-- Dashboard -->
@@ -42,7 +42,7 @@
                 <span class="-mr-1 font-medium">Dashboard</span>
             </a>
             </button>
-        
+         
 
             <!-- Artikel -->
             <button>
@@ -51,7 +51,7 @@
                 <span>Artikel</span>
             </a>
             </button>
-    
+          
 
             <!-- Validasi Riwayat -->
             <button>
