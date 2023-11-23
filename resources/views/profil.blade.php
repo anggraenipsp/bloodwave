@@ -65,7 +65,7 @@
             <div class=" flex items-center  justify-between p-4  rounded-lg bg-red-dark shadow-indigo-50 shadow-md">
             <div class="flex flex-col justify-center w-full">
                 <h2 class="text-white  font-bold text-center">Golongan Darah</h2>
-                <h3 class="mt-2 text-3xl font-bold text-white text-center">A</h3>
+                <h3 class="mt-2 text-3xl font-bold text-white text-center">{{$goldar}}</h3>
             </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
             <div class=" flex items-center  justify-between p-4  rounded-lg bg-red-dark shadow-indigo-50 shadow-md">
             <div class="flex flex-col justify-center w-full">
                 <h2 class="text-white  font-bold text-center">Total Donor</h2>
-                <h3 class="mt-2 text-3xl font-bold text-white text-center">9</h3>
+                <h3 class="mt-2 text-3xl font-bold text-white text-center">{{ $totalDonor }}</h3>
             </div>
             </div>
         </div>

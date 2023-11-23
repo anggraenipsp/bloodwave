@@ -17,6 +17,7 @@ return new class extends Migration
 
             // Definisikan kunci asing untuk id_lokasi
             $table->foreign('id_lokasi')->references('id')->on('tb_lokasi_donor');
+            $table->dropColumn('lokasi_donor');
         });
     }
 

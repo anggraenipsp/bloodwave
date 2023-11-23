@@ -120,47 +120,47 @@
             <div>
                 <div class="flex justify-between border-t text-sm font-normal mt-4 space-x-4">
                     <div class="px-2 flex">
-                        <span>Sabtu, 07 Oktober 2023 </span>
+                        <span>{{$riwayatTerbaru ? date("l, d F Y", strtotime($riwayatTerbaru->tanggal_donor )) : 'data belum tersedia' }}</span>
                     </div>
                 </div>
             </div>
 
             <div class="flex justify-between border-t-2 text-sm font-normal mt-4 space-x-4">
                 <div class="px-2">
-                    <span>18.00 WIB</span>
+                    <span>{{$riwayatTerbaru ? date("g:i A", strtotime($riwayatTerbaru->jam_donor)) : '0.00'}}</span>
                 </div>
             </div>
 
             <div class="flex justify-between border-t-2 text-sm font-normal mt-4 space-x-4">
                 <div class="px-2">
-                    <span>RS Jaya Medika</span>
+                    <span>{{$riwayatTerbaru->lokasiDonor->nama_lokasi ?? ''}}</span>
                 </div>
             </div>
         </div>
         <div class="bg-white p-4 w-full rounded-md text-center">
             <div class="flex justify-between bg-gradient-to-tr from-red-medium to-red-medium rounded-md py-2 px-4 text-white font-bold text-md">
                 <div>
-                    <span>Donor Terakhir</span>
+                    <span>Donor Yang Akan Datang</span>
                 </div>
             </div>
 
             <div>
                 <div class="flex justify-between border-t text-sm font-normal mt-4 space-x-4">
                     <div class="px-2 flex">
-                        <span>Sabtu, 07 Oktober 2023 </span>
+                        <span>{{$riwayatMenyusul ? date("l, d F Y", strtotime($riwayatMenyusul->tanggal_donor )) : 'data belum tersedia' }} </span>
                     </div>
                 </div>
             </div>
 
             <div class="flex justify-between border-t-2 text-sm font-normal mt-4 space-x-4">
                 <div class="px-2">
-                    <span>18.00 WIB</span>
+                    <span>{{$riwayatMenyusul ? date("g:i A", strtotime($riwayatMenyusul->jam_donor)) : '0.00'}}</span>
                 </div>
             </div>
 
             <div class="flex justify-between border-t-2 text-sm font-normal mt-4 space-x-4">
                 <div class="px-2">
-                    <span>RS Jaya Medika</span>
+                    <span>{{$riwayatMenyusul->lokasiDonor->nama_lokasi ?? ''}}</span>
                 </div>
             </div>
         </div>

@@ -21,7 +21,7 @@ Route::middleware(['web'])->post('/simpan_data_riwayat', [RiwayatController::cla
 Route::get('/riwayat', [RiwayatController::class, 'index'])->name('tampil_riwayat');
 Route::put('/riwayat/{id}/edit', [RiwayatController::class, 'edit_riwayat'])->name('edit_riwayat');
 Route::delete('/riwayat/{id}', [RiwayatController::class, 'hapus_riwayat'])->name('hapus_riwayat');
-Route::post('/simpan_data_riwayat', 'Controller@simpanDataRiwayat');
+Route::post('/simpan_data_riwayat', [RiwayatController::class ,'simpan_data_riwayat']);
 
 
 
