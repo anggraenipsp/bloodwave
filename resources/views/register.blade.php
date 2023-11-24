@@ -73,10 +73,10 @@
                     </div>
                     <div class="flex -mx-3">
                         <div class="w-full px-3 mb-5">
-                            <label for="" class="text-xs font-semibold px-1">Umur</label>
+                            <label for="" class="text-xs font-semibold px-1">Golongan Darah</label>
                             <div class="flex">
-                                <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i class="mdi mdi-Face-outline text-gray-400 text-lg"></i></div>
-                                <input name="umur" type="number" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="20">
+                                <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i class="mdi mdi-blood-outline text-gray-400 text-lg"></i></div>
+                                <input name="golongandarah" type="dropdown" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="AB">
                             </div>
                         </div>
                     </div>

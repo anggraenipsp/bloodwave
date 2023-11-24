@@ -36,10 +36,9 @@
         <div class="p-4 space-y-4">
             <!-- Dashboard -->
             <button>
-            <a href="{{ route ('admin')}}" aria-label="dashboard"
-                class="relative px-4 py-3 flex items-center space-x-4 rounded-lg text-red-medium bg-gradient-to-r from-cream-dark to-cream-medium">
-                <i class="fas fa-home text-red-medium"></i>
-                <span class="-mr-1 font-medium">Dashboard</span>
+            <a href="{{ route ('admin')}}" class="px-4 py-3 flex items-center space-x-4 rounded-md text-cream-medium group">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
             </a>
             </button>
     
@@ -53,10 +52,12 @@
 
             <!-- Validasi Riwayat -->
             <button>
-            <a href="{{ route ('validasi')}}" class="px-4 py-3 flex items-center space-x-4 rounded-md text-cream-medium group">
-                <i class="fas fa-exchange-alt"></i>
-                <span>Riwayat Donor</span>
+            <a href="{{ route ('validasi')}}" aria-label="dashboard"
+                class="relative px-4 py-3 flex items-center space-x-4 rounded-lg text-red-medium bg-gradient-to-r from-cream-dark to-cream-medium">
+                <i class="fas fa-exchange-alt text-red-medium"></i>
+                <span class="-mr-1 font-medium">Riwayat Donor</span>
             </a>
+
             </button>
 
 
@@ -105,8 +106,56 @@
             </div>
         </div>
 
+    <br>
     <!-- Tabel Yang Menampilkan Riwayat yang sudah di validasi -->
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            ID
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Riwayat Donor
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Tanggal Input
+                        </th>
+                        <th scope="col" class="pr-10 py-3">
+                            <span class="sr-only">Status</span>
+                        </th>
+                    </tr>
+                    </thead>
+                <tbody>
+            
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            
+                        </th>
+                            <td class="px-6 py-4">
+                            
+                            </td>
+                            <td class="px-6 py-4">
+                            
+                            </td>
+                            <td class="pr-10 py-4 text-right">
+                                <a href="" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Approved</a>
+                                <form action="" method="POST" style="display: inline;">
+                                
+                                    
+                                    <button type="submit" class="font-medium text-blue-600 dark:text-red-500 hover:underline" onclick="return confirm('Apakah Anda yakin ingin menolak riwayat donor ini?')">Rejected</button>
+                                </form>
+                            </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
 
+    </div>
+    <!-- isi end -->
+
+<!-- div akhir -->
+</div>
     <!-- Script  -->
     <script>
 
