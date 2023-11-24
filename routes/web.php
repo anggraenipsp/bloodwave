@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\ArtikelController;
 
 
 /*
