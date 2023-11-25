@@ -16,11 +16,12 @@ class ProfilController extends Controller
     public function index()
     {
         $lokasiDonor = LokasiDonor::all();
-        $riwayatDonor = RiwayatDonor::paginate(5);
+        $riwayatDonor = RiwayatDonor::where('id_user', Auth::user()->id)->where('tanggal_donor', '<=', date("Y-m-d"))->orderByDesc('tanggal_donor')->paginate(5);
         $goldar = Auth::user()->gol_darah;
         $totalDonor = RiwayatDonor::where('id_user', Auth::user()->id)->where('tanggal_donor', '<=', date("Y-m-d"))->orderByDesc('tanggal_donor')->count();
         $riwayatTerbaru = RiwayatDonor::with(['lokasiDonor'])->where('id_user', Auth::user()->id)->where('tanggal_donor', '<=', date("Y-m-d"))->orderByDesc('tanggal_donor')->first();
-        $riwayatMenyusul = RiwayatDonor::with(['lokasiDonor'])->where('id_user', Auth::user()->id)->where('tanggal_donor', '>', date("Y-m-d"))->orderBy('tanggal_donor')->first();
+        $riwayatMenyusul = RiwayatDonor::with(['lokasiDonor'])->where('id_user', Auth::user()->id)->orderByDesc('tanggal_donor')->first();
+        $riwayatMenyusul->tanggal_donor = date('d-m-Y', strtotime($riwayatMenyusul->tanggal_donor) + (30 * 24 * 3600));
         return view('profil', compact('riwayatDonor', 'lokasiDonor', 'goldar', 'totalDonor', 'riwayatTerbaru', 'riwayatMenyusul'));
     }
 

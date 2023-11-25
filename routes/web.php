@@ -53,7 +53,8 @@ Route::get('/notifikasi', function () {
 })->middleware('islogin')->name('notifikasi');
 
 Route::get('/letsread', function () {
-    return view('letsread');
+    $artikel = Artikel::with('artikelFile')->get();
+    return view('letsread', compact('artikel'));
 })->middleware('islogin')->name('letsread');
 
 Route::get('/event', function () {

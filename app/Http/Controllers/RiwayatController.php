@@ -19,7 +19,8 @@ class RiwayatController extends Controller
         $lokasiDonor = LokasiDonor::all();
         $riwayatDonor = RiwayatDonor::paginate(5);
         $riwayatTerbaru = RiwayatDonor::with(['lokasiDonor'])->where('id_user', Auth::user()->id)->where('tanggal_donor', '<=', date("Y-m-d"))->orderByDesc('tanggal_donor')->first();
-        $riwayatMenyusul = RiwayatDonor::with(['lokasiDonor'])->where('id_user', Auth::user()->id)->where('tanggal_donor', '>', date("Y-m-d"))->orderBy('tanggal_donor')->first();
+        $riwayatMenyusul = RiwayatDonor::with(['lokasiDonor'])->where('id_user', Auth::user()->id)->orderByDesc('tanggal_donor')->first();
+        $riwayatMenyusul->tanggal_donor = date('d-m-Y', strtotime($riwayatMenyusul->tanggal_donor) + (30 * 24 * 3600));
         //$riwayatDonor = RiwayatDonor::all();
         return view('riwayat', compact('riwayatDonor', 'lokasiDonor', 'riwayatTerbaru', 'riwayatMenyusul'));
     }

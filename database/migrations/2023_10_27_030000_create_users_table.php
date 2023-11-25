@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('password', 200);
             $table->string('nama', 300);
             $table->string('no_telp', 15);
-            $table->integer('umur');
             $table->enum('gol_darah', ['A','B','AB','O']);
             $table->timestamps();
         });

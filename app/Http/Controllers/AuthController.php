@@ -25,7 +25,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'nama' => $request->nama,
             'no_telp' => $request->nomortelepon,
-            'umur' => $request->umur
+            'golongandarah' => $request->gol_darah
         ]);
 
         return redirect('/login');
@@ -51,6 +51,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/homepage');
     }
 }
