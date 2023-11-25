@@ -1,10 +1,11 @@
 <?php
 
+use App\Models\Artikel;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\RiwayatController;
 
 
 /*
@@ -60,13 +61,13 @@ Route::get('/event', function () {
 })->middleware('islogin')->name('event');
 
 Route::get('/admin', function () {
-    return view('admin');
+    $artikel = Artikel::all();
+    return view('admin', compact('artikel'));
 })->name('admin');
 
 Route::get('/validasi', function () {
     return view('validasi');
 })->name('validasi');
 
-Route::get('/artikel', function () {
-    return view('artikel');
-})->name('admin.artikel');
+
+Route::resource('/artikel', App\Http\Controllers\ArtikelController::class);

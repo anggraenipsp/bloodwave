@@ -5,20 +5,21 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Artikel;
 use App\Models\artikelFile;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Auth\EloquentUserProvider;
 
-class RiwayatController extends Controller
+class ArtikelController extends Controller
 {
 
     public function index()
     {
-        $artikel = Artikel::all();
+        // $artikel = Artikel::all();
         return view('artikel');
     }
 
-    public function simpan_artikel(Request $request)
+    public function store(Request $request)
     {
         //Validasi data yang diterima dari formulir
         try {
@@ -31,14 +32,17 @@ class RiwayatController extends Controller
             $judul = $request->input('judul');
             $isi = $request->input('opening');
             $created_at = $request->input('tanggal_unggah');
-            $created_at = \Carbon\Carbon::createFromFormat('d-m-Y', $created_at)->format('Y-m-d');
-
+            $created_at = \Carbon\Carbon::createFromFormat('Y-m-d', $created_at)->format('d-m-Y');
+            
             $artikel = new Artikel;
             $artikel->judul = $judul;
             $artikel->isi = $isi;
+            $artikel->slug = Str::slug($judul);
             $artikel->created_at = $created_at;
-            $artikel->save();
+            $artikel->sampul = "";
 
+            $artikel->save();
+            
             if ($request->hasFile('foto')) {
                 $sampul = $request->file('foto');
                 $extension = $sampul->getClientOriginalExtension();
@@ -49,13 +53,13 @@ class RiwayatController extends Controller
                 $nama_sampul =  $tanggal . '_' . $id . '.' . $extension;
 
                 // Pastikan direktori penyimpanan gambar ada
-                $directory = public_path('artikel');
+                $directory = public_path('artikel_file');
 
                 if (!file_exists($directory)) {
                     mkdir($directory, 0755, true);
                 }
 
-                $gambar->move($directory, $nama_sampul);
+                $sampul->move($directory, $nama_sampul);
 
                 // Menyimpan nama file gambar ke tabel tb_evidence_file
                 $artikelFile = new artikelFile; // Ganti dengan model Anda
@@ -63,16 +67,26 @@ class RiwayatController extends Controller
                 $artikelFile->nama_file = $nama_sampul;
                 $artikelFile->jenis_file = 'Sampul Artikel';
                 $artikelFile->save();
+
+                $artikel->sampul = $nama_sampul;
+                $artikel->save();
             }
+
             session()->flash('pesan_berhasil', 'Data berhasil ditambahkan');
             // Redirect ke halaman yang sesuai setelah berhasil menyimpan data
-            return redirect()->route('tampil_artikel');
+            return redirect()->route('admin');
         } catch (\Exception $e) {
             dd($e);
         }
     }
 
-    public function edit_artikel(Request $request, $id)
+     public function edit(string $id)
+    {
+        $artikel = Artikel::find($id);
+        return view('artikel', compact('artikel'));
+    }
+
+    public function update(Request $request, $id)
     {
         try {
             // Validasi data yang diterima dari formulir
@@ -123,13 +137,13 @@ class RiwayatController extends Controller
             $artikel->save();
 
             session()->flash('pesan_berhasil', 'Data berhasil diubah');
-            return redirect()->route('tampil_artikel');
+            return redirect()->route('admin');
         } catch (\Exception $e) {
             dd($e);
         }
     }
 
-    public function hapus_artikel($id)
+    public function destroy(string $id)
     {
         $artikel = Artikel::find($id);
 
@@ -146,6 +160,6 @@ class RiwayatController extends Controller
 
         $artikel->delete();
         session()->flash('pesan_berhasil', 'Data berhasil dihapus');
-        return redirect()->route('tampil_artikel');
+        return redirect()->route('admin');
     }
 }

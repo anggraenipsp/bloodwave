@@ -46,7 +46,7 @@
 
             <!-- Artikel -->
             <button>
-            <a href="{{ route ('admin.artikel')}}" class="px-4 py-3 flex items-center space-x-4 rounded-md text-cream-medium group">
+            <a href="{{ route('artikel.index')}}" class="px-4 py-3 flex items-center space-x-4 rounded-md text-cream-medium group">
                 <i class="fas fa-book"></i>
                 <span>Artikel</span>
             </a>
@@ -80,7 +80,7 @@
             <div class="bg-red-medium md:p-2 p-6 rounded-lg border border-red-dark mb-4 lg:mb-0 shadow-md lg:w-[35%]">
                 <div class="flex justify-center items-center space-x-5 h-full">
                     <div>
-                        <h2 class="text-4xl font-semibold text-cream-medium">Nama Admin</h2>
+                        <h2 class="text-4xl font-semibold text-cream-medium">Hi, {{ Auth::user()->nama ?? 'Admin' }}</h2>
                         <h6 class="font-semibold text-cream-medium">Lihat Update Hari Ini Yuk!</h6>
                     </div>
                 </div>
@@ -127,26 +127,28 @@
                     </tr>
                     </thead>
                 <tbody>
-            
+                    @foreach ($artikel as $isiArtikel)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            
+                            {{ $isiArtikel->id }}
                         </th>
                             <td class="px-6 py-4">
-                            
+                                {{ $isiArtikel->judul }}
                             </td>
                             <td class="px-6 py-4">
-                            
+                                {{ $isiArtikel->created_at }}
                             </td>
                             <td class="pr-10 py-4 text-right">
-                                <a href="" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                <form action="" method="POST" style="display: inline;">
-                                
+                                <a href="{{ route('artikel.edit',  $isiArtikel->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                <form action="{{ route('artikel.destroy', $isiArtikel->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method("DELETE")
                                     
                                     <button type="submit" class="font-medium text-blue-600 dark:text-red-500 hover:underline" onclick="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')">Hapus</button>
                                 </form>
                             </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
